@@ -1,0 +1,55 @@
+.BoxSentMSG {
+  
+
+
+  display: flex;
+
+  padding-top: -7px;
+  bottom: 30px;
+  position: absolute;
+  width: 100%;
+  align-items: center;
+}
+
+.langBtn {
+  width: fitContent;
+  height: 42px;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  /* background-color: #ededed !important; */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.input {
+  margin: 0px 10px;
+  border: none;
+  height: 42px;
+  font-size: 18px;
+  /* background-color: #ededed; */
+  border-radius: 20px;
+  width: 100%;
+  border: 1px solid #0C2D57;
+  /* padding-left: 12px; */
+  margin-bottom: 5px;
+  outline: none;
+  padding: 0px 11px 0px 12px;
+}
+.schemesList {
+    padding: 5px 10px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 100%;
+    min-width: 50%;
+    /* font-weight: 500; */
+    /* margin: 0; */
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+  
+  }
