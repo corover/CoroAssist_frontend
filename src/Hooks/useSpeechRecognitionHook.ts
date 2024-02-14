@@ -5,17 +5,12 @@ import SpeechRecognition, {
 import { registerFlow } from "../Apis";
 import useRecorder from "../ChatBot/ChatContent/Recorder/UserRecorder";
 import { useSelector } from "react-redux";
-import { apiSelector } from "../store/Redux-selector/Selector";
-import { lang } from "../store/Redux-selector/Selector";
 import { reducer } from "../store/Redux-selector/Selector";
-import { flowReducer } from "../store/Redux-selector/Selector";
 
 function useSpeechRecognitionHook() {
-  const { stateView, districtView, cityView } = useSelector(flowReducer);
 
-  const { selectedLanguage, checkMic } = useSelector(reducer);
+  const { selectedLanguage,  } = useSelector(reducer);
   let selectedLanguage_ = selectedLanguage;
-  const nextContext = useSelector(apiSelector).nextContext;
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const recorder = useRecorder((blob: any) => {
     registerFlow(blob);

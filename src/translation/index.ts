@@ -28,7 +28,7 @@ export const chatText = {
     greeting: "Hi! What can i do for you today",
     button1: "Translate",
     button2: "Answer my queries",
-    translateTxt: "Please let me know what you want translated    ",
+    translateTxt: "Please let me know what you want translate   ",
     uploadMssg: " File uploaded successfully !",
     uploadMssg1: " Please ask your questions regarding the uploaded PDF",
     uploadLoading: "Please wait a moment...",

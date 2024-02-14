@@ -11,20 +11,24 @@ import { playAudioURL } from "../utils/data";
 import useSpeechRecognitionHook from "../Hooks/useSpeechRecognitionHook";
 import { reducer } from "../store/Redux-selector/Selector";
 import Upload from "../FlowCoro/UploadFile/Index";
+import { setDefaultBtn } from "../store/Redux-Dispatcher/Dispatcher";
 
 function Mic(props: any) {
-  const {close , upload} = props;
+  const { close, upload } = props;
   const { selectedLanguage } = useSelector(reducer);
 
   return (
-    <ContainerVoice className={"ContainerVoice"}>
+    <ContainerVoice className={"ContainerVoice"} >
       <CloseIcon
         className={"CloseIcon"}
         src="close.png"
         width={15}
         height={15}
         alt="close"
-        onClick={()=>{close(false)}}
+        onClick={() => {
+          close(false);
+          setDefaultBtn(true);
+        }}
       />
 
       <div style={{ height: "100%", flexGrow: 1 }}>

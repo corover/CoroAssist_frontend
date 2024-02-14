@@ -6,7 +6,8 @@ import {
   backgroundColor,
   checkMic,
   checkFileUpload,
-  langFlag
+  langFlag,
+  defaultBtn,
 } from "../Redux-actions/Actions";
 
 export const setSelectedLanguage = (val: any) => {
@@ -33,7 +34,10 @@ export const setCheckFileUpload = (val: any) => {
   store.dispatch(checkFileUpload(val));
 };
 
+export const setLangFlag = (val: any) => {
+  store.dispatch(langFlag(val));
+};
 
-export const setLangFlag= (val:any)=>{
-  store.dispatch(langFlag(val))
-}
+export const setDefaultBtn = (val: any) => {
+  store.dispatch(defaultBtn(val));
+};

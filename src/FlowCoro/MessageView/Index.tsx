@@ -33,6 +33,7 @@ import { ContainerVoice } from "../../UI/Style";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { LogoImage, TopLogoHeader } from "../../ChatBot/Body/Style";
+import { setDefaultBtn } from "../../store/Redux-Dispatcher/Dispatcher";
 import {
   startOver,
   askAgain,
@@ -45,7 +46,7 @@ function Messages() {
   const { languageView, greetingView, chatbotView, uploadfileView } =
     useSelector(flowReducer);
 
-  const { selectedLanguage, loading, checkMic, langFlag, checkFileUpload } =
+  const { selectedLanguage, loading, checkMic, langFlag, checkFileUpload, defaultBtn } =
     useSelector(reducer);
 
   const options = [
@@ -70,7 +71,6 @@ function Messages() {
   const { apiData, uploadData } = useSelector(apiSelector);
   const [upload, setUpload] = useState(false);
   const [translate, setTranslate] = useState(true);
-  const [defaultBtn, setDefaultBtn] = useState(true);
 
   const {
     transcript,
@@ -130,7 +130,7 @@ function Messages() {
         text: (chatText as any)[selectedLanguage].translateTxt,
         sender: "bot",
         time: moment().format("h:mm A"),
-        audio: "",
+        audio: (audio as any)[selectedLanguage].translateTxt,
       },
     ]);
   };
@@ -150,7 +150,7 @@ function Messages() {
     setMessages((prevChats: any) => [
       ...prevChats,
       {
-        text: input,
+        text: input.charAt(0).toUpperCase() + input.slice(1),
         sender: "user",
         time: moment().format("h:mm A"),
       },
@@ -165,6 +165,8 @@ function Messages() {
     });
   };
 
+
+  
   React.useEffect(() => {
     if (chatMessageRef.current) {
       chatMessageRef.current.scrollTop = chatMessageRef.current.scrollHeight;
@@ -187,7 +189,7 @@ function Messages() {
         setMessages((prevChats: any) => [
           ...prevChats,
           {
-            text: transcript,
+            text: transcript.charAt(0).toUpperCase() + transcript.slice(1),
             sender: "user",
             time: moment().format("h:mm A"),
           },
@@ -233,14 +235,13 @@ function Messages() {
   }, [apiData]);
 
   useEffect(() => {
-
     setMessages((prevChats: any) => [
-      // ...prevChats,
+      ...prevChats,
       {
         text: (chatText as any)[selectedLanguage].greeting,
         sender: "bot",
         time: moment().format("h:mm A"),
-        audio:  (audio as any)[selectedLanguage].greeting,
+        audio: (audio as any)[selectedLanguage].greeting,
       },
       {
         text: (chatText as any)[selectedLanguage].translateTxt,
@@ -248,23 +249,6 @@ function Messages() {
         time: moment().format("h:mm A"),
         audio: (audio as any)[selectedLanguage].translateTxt,
       },
-      // {
-      //   text: (
-      //     <>
-      //       {options &&
-      //         options !== undefined &&
-      //         options.map((val: any, index: any) => (
-      //           <span key={index}>
-      //             <p className="schemesList" onClick={() => handleOptions(val)}>
-      //               {val.val}
-      //             </p>
-      //           </span>
-      //         ))}
-      //     </>
-      //   ),
-      //   sender: "bot",
-      //   time: moment().format("h:mm A"),
-      // },
     ]);
   }, [selectedLanguage]);
 
@@ -278,7 +262,6 @@ function Messages() {
           sender: "bot",
           time: moment().format("h:mm A"),
           audio: (audio as any)[selectedLanguage].uploadMssg,
-         
         },
 
         {
@@ -287,7 +270,6 @@ function Messages() {
           time: moment().format("h:mm A"),
           audio: (audio as any)[selectedLanguage].uploadMssg1,
         },
-        //uploadMssg1
       ]);
     }
   }, [uploadData]);
@@ -391,7 +373,9 @@ function Messages() {
                 </React.Fragment>
               ))}
 
-            <>
+            
+          </div>
+          <>
               {loading && <Loading />}
               {/* <div className="BoxSentMSG" style={{ bottom: "80px " }}>
                 <Button variant="outlined">Delete</Button>
@@ -465,7 +449,6 @@ function Messages() {
             </>
 
             {listening && <VoiceAnimation />}
-          </div>
         </>
       ) : (
         <Language />

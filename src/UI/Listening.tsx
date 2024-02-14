@@ -16,6 +16,7 @@ function ListeningMic() {
         alignItems: "center",
         position: "relative",
         width: "100%",
+        backgroundColor:"#D8D3CD !important"
       }}
     >
       <VoiceRecognitionContainer className={"VoiceRecognitionContainer"}>

@@ -49,6 +49,8 @@ function Language() {
           justifyContent: "center",
           alignItems: "center",
           textAlign: "center",
+          height:"100vh"
+
         }}
       >
         <div style={{ marginTop: "30px" }}>
@@ -63,13 +65,14 @@ function Language() {
           <div
             style={{
               display: "flex",
-              flexFlow: "wrap",
+              // flexFlow: "wrap",
               cursor: "pointer",
-              overflowY: "auto",
-              paddingTop: "10px",
-              justifyContent: "space-evenly",
-              margin: "0px 10px",
-              // placeContent: " space-between",
+              // overflowY: "auto",
+              // paddingTop: "10px",
+              // justifyContent: "space-evenly",
+              // margin: "0px 10px",
+              justifyContent:"center",
+                // placeContent: " space-between",
             }}
           >
             {languageList.map((language) => (

@@ -12,6 +12,9 @@ export const CHECK_FILEUPLOAD = "CHECK_FILEUPLOAD";
 
 export const LANG_FLAG = "LANG_FLAG";
 
+
+export const DEFAULT_BTN = " DEFAULT_BTN"
+
 export const selectedLanguage = (value: any) => ({
   type: SELECTED_LANGUAGE,
   payload: value,
@@ -44,5 +47,11 @@ export const checkFileUpload = (value: any) => ({
 
 export const langFlag = (value: any) => ({
   type: LANG_FLAG,
+  payload: value,
+});
+
+
+export const defaultBtn = (value: any) => ({
+  type: DEFAULT_BTN,
   payload: value,
 });

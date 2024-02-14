@@ -6,6 +6,7 @@ import {
   CHECK_MIC,
   CHECK_FILEUPLOAD,
   LANG_FLAG,
+  DEFAULT_BTN,
 } from "../Redux-actions/Actions";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   checkMic: false,
   checkFileUpload: false,
   langFlag: false,
+  defaultBtn: true
 };
 
 const reducer_ = (state = initialState, action: any) => {
@@ -58,11 +60,18 @@ const reducer_ = (state = initialState, action: any) => {
       };
 
     case LANG_FLAG:
-      console.log(action.payload,)
       return {
         ...state,
         langFlag: action.payload,
       };
+
+
+      case DEFAULT_BTN:
+        return {
+          ...state,
+          defaultBtn: action.payload,
+        };
+  
     default:
       return state;
   }

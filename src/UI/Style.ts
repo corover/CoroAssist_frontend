@@ -46,7 +46,8 @@ export const ContainerVoice = styled.div`
   position: absolute;
   bottom: 29px;
   left: 0px;
-  background-color: white;
+  background-color: white
+  ;
   z-index: 999999;
   border-bottom: 1px solid rgba(128, 128, 128, 0.31);
   border-top-left-radius: 15px;
