@@ -7,8 +7,10 @@
   padding-top: -7px;
   bottom: 30px;
   position: absolute;
-  width: 100%;
+  width: 98%;
   align-items: center;
+  margin: 0px 3px 5px 3px;
+  border-radius: 30px;
 }
 
 .langBtn {
@@ -25,16 +27,15 @@
   transition: background-color 0.3s;
 }
 .input {
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
   border: none;
   height: 42px;
   font-size: 18px;
+  border: none;
   /* background-color: #ededed; */
   border-radius: 20px;
   width: 100%;
-  border: 1px solid #0C2D57;
-  /* padding-left: 12px; */
-  margin-bottom: 5px;
+ 
   outline: none;
   padding: 0px 11px 0px 12px;
 }

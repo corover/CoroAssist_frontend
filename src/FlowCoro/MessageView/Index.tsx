@@ -46,8 +46,14 @@ function Messages() {
   const { languageView, greetingView, chatbotView, uploadfileView } =
     useSelector(flowReducer);
 
-  const { selectedLanguage, loading, checkMic, langFlag, checkFileUpload, defaultBtn } =
-    useSelector(reducer);
+  const {
+    selectedLanguage,
+    loading,
+    checkMic,
+    langFlag,
+    checkFileUpload,
+    defaultBtn,
+  } = useSelector(reducer);
 
   const options = [
     {
@@ -165,8 +171,6 @@ function Messages() {
     });
   };
 
-console.log("listening", listening)
-  
   React.useEffect(() => {
     if (chatMessageRef.current) {
       chatMessageRef.current.scrollTop = chatMessageRef.current.scrollHeight;
@@ -273,7 +277,6 @@ console.log("listening", listening)
       ]);
     }
   }, [uploadData]);
-console.log("transcript", transcript)
   return (
     <>
       {!langFlag ? (
@@ -372,43 +375,42 @@ console.log("transcript", transcript)
                   )}
                 </React.Fragment>
               ))}
-
-            
           </div>
           <>
-              {loading && <Loading />}
-              {/* <div className="BoxSentMSG" style={{ bottom: "80px " }}>
+            {loading && <Loading />}
+            {/* <div className="BoxSentMSG" style={{ bottom: "80px " }}>
                 <Button variant="outlined">Delete</Button>
                 <Button variant="contained">Send</Button>
               </div> */}
 
-              <div
-                className="BoxSentMSG"
-                style={{
-                  bottom: "80px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
+            <div
+              className="BoxSentMSG"
+              style={{
+                bottom: "80px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <Button
+                variant={!defaultBtn ? "outlined" : "contained"}
+                size="small"
+                style={{ width: "50%", margin: "7px" }}
+                onClick={handleTanslate}
               >
-                <Button
-                  variant={!defaultBtn ? "outlined" : "contained"}
-                  size="small"
-                  style={{ width: "50%", margin: "7px" }}
-                  onClick={handleTanslate}
-                >
-                  {(chatText as any)[selectedLanguage].button1}
-                </Button>
-                <Button
-                  variant={defaultBtn ? "outlined" : "contained"}
-                  size="small"
-                  style={{ width: "50%", margin: "7px" }}
-                  onClick={handleUpload}
-                >
-                  {(chatText as any)[selectedLanguage].button2}
-                </Button>
-              </div>
-              <div className="BoxSentMSG">
-                <input
+                {(chatText as any)[selectedLanguage].button1}
+              </Button>
+              <Button
+                variant={defaultBtn ? "outlined" : "contained"}
+                size="small"
+                style={{ width: "50%", margin: "7px" }}
+                onClick={handleUpload}
+              >
+                {(chatText as any)[selectedLanguage].button2}
+              </Button>
+            </div>
+            <div className="BoxSentMSG" style={{  border: "1px solid #0C2D57",
+}}>
+              <input
                   placeholder={(placeholder as any)[selectedLanguage]}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -444,11 +446,12 @@ console.log("transcript", transcript)
                   <IconButton size="large" onClick={handleSendMessage}>
                     <SendIcon style={{ color: "#0C2D57" }} />
                   </IconButton>
-                )}
-              </div>
-            </>
+                )} 
+             
+            </div>
+          </>
 
-            {listening && <VoiceAnimation />}
+          {listening && <VoiceAnimation />}
         </>
       ) : (
         <Language />
