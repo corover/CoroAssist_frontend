@@ -165,7 +165,7 @@ function Messages() {
     });
   };
 
-
+console.log("listening", listening)
   
   React.useEffect(() => {
     if (chatMessageRef.current) {
@@ -243,12 +243,12 @@ function Messages() {
         time: moment().format("h:mm A"),
         audio: (audio as any)[selectedLanguage].greeting,
       },
-      {
-        text: (chatText as any)[selectedLanguage].translateTxt,
-        sender: "bot",
-        time: moment().format("h:mm A"),
-        audio: (audio as any)[selectedLanguage].translateTxt,
-      },
+      // {
+      //   text: (chatText as any)[selectedLanguage].translateTxt,
+      //   sender: "bot",
+      //   time: moment().format("h:mm A"),
+      //   audio: (audio as any)[selectedLanguage].translateTxt,
+      // },
     ]);
   }, [selectedLanguage]);
 
@@ -273,7 +273,7 @@ function Messages() {
       ]);
     }
   }, [uploadData]);
-
+console.log("transcript", transcript)
   return (
     <>
       {!langFlag ? (
