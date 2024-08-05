@@ -63,8 +63,7 @@ export const fileUpload = async (apiBody: any) => {
       });
   } else {
     console.error("userToken is null");
-    // handle the case when userToken is null, e.g., show an error message
-    return null; // or handle accordingly based on your application's logic
+    return null;
   }
 };
 

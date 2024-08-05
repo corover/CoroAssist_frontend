@@ -6,19 +6,22 @@ import {
   ContainerVoice,
   VoiceRecognitionContainer,
   VoiceRecognitionSpan,
-} from "../UI/Style";
+} from "./Style";
 import { playAudioURL } from "../utils/data";
 import useSpeechRecognitionHook from "../Hooks/useSpeechRecognitionHook";
 import { reducer } from "../store/Redux-selector/Selector";
 import Upload from "../FlowCoro/UploadFile/Index";
 import { setDefaultBtn } from "../store/Redux-Dispatcher/Dispatcher";
 
-function Mic(props: any) {
-  const { close, upload } = props;
+function UploadDrawer(props: any) {
+  const { close, upload , resetUpload} = props;
   const { selectedLanguage } = useSelector(reducer);
 
   return (
-    <ContainerVoice className={"ContainerVoice"} >
+    <ContainerVoice
+      className={"ContainerVoice"}
+      style={{ boxShadow: " #cacaca 0px 1px 2px 0px, #cacaca 0px 2px 6px 2px",  border: "1px solid rgb(200, 194, 188)"}}
+    >
       <CloseIcon
         className={"CloseIcon"}
         src="close.png"
@@ -31,21 +34,10 @@ function Mic(props: any) {
         }}
       />
 
-      <div style={{ height: "100%", flexGrow: 1 }}>
-        <div
-          style={{
-            margin: "auto",
-            textAlign: "justify",
-            padding: "0px 15px 0px 15px",
-          }}
-        >
-          <p style={{ textAlign: "center", fontSize: "20px" }}></p>
-        </div>
-      </div>
+      
 
       <div
         style={{
-          height: "30vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -54,10 +46,10 @@ function Mic(props: any) {
           width: "100%",
         }}
       >
-        <Upload />
+        <Upload upload={upload} resetUpload={resetUpload}/>
       </div>
     </ContainerVoice>
   );
 }
 
-export default Mic;
+export default UploadDrawer;

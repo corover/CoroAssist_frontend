@@ -1,4 +1,3 @@
-import React from "react";
 import Options from "./Options";
 import { languageList } from "../../utils/data";
 import { reducer, flowReducer } from "../../store/Redux-selector/Selector";
@@ -10,25 +9,23 @@ import {
 } from "../../store/Redux-Dispatcher/Dispatcher";
 import {
   setChatbot_view,
-  setGreetings_view,
   setLanguage_view,
-  setUploadFile_view,
 } from "../../store/Redux-Dispatcher/FlowDispatcher";
 import { IconButton } from "@mui/material";
 
 import EastIcon from "@mui/icons-material/East";
-import { LogoImage, TopLogoHeader } from "../../ChatBot/Body/Style";
+import { LogoImage } from "../../ChatBot/Body/Style";
 
 function Language() {
-  const { selectedLanguage, checkFileUpload, chatbotView } = useSelector(reducer);
+  const { selectedLanguage, checkFileUpload, chatbotView } =
+    useSelector(reducer);
   const handleLanguageClick = (languageName: any) => {
     const lang = languageList.find((lang) => lang.name === languageName);
     lang && setSelectedLanguage(lang.id);
   };
 
   const handleLanguage = () => {
-    // setLanguage_view(false);
-    // setChatbot_view(true);
+ 
 
     if (checkFileUpload) {
       setLanguage_view(false);
@@ -41,7 +38,6 @@ function Language() {
 
   return (
     <>
-     
       <div
         style={{
           display: "flex",
@@ -50,9 +46,14 @@ function Language() {
           alignItems: "center",
           textAlign: "center",
           height:"100vh"
-
         }}
       >
+        <LogoImage
+          className={"LogoImage"}
+          src="logocoro.png"
+          alt="header"
+          style={{ height: "200px !important" }}
+        />
         <div style={{ marginTop: "30px" }}>
           <p
             style={{
@@ -65,14 +66,8 @@ function Language() {
           <div
             style={{
               display: "flex",
-              // flexFlow: "wrap",
               cursor: "pointer",
-              // overflowY: "auto",
-              // paddingTop: "10px",
-              // justifyContent: "space-evenly",
-              // margin: "0px 10px",
-              justifyContent:"center",
-                // placeContent: " space-between",
+              justifyContent: "center",
             }}
           >
             {languageList.map((language) => (

@@ -1,0 +1,55 @@
+main {
+    display: grid;
+    place-items: center;
+    padding: 2em;
+  }
+  
+  .circles {
+    background: #1a1a1a;
+    clip-path: circle(100px at 50% 50%);
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    animation: infiniteCircle 0.8s linear infinite; 
+    position: relative; 
+  }
+  
+  .circles > * {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+  }
+  
+  @keyframes infiniteCircle {
+    0% {
+      background: rgb(200, 194, 188);
+      clip-path: circle(20% at 50% 50%);
+    }
+  
+    20% {
+      background: rgb(200, 194, 188);
+      clip-path: circle(25% at 50% 50%);
+    }
+  
+    40% {
+      background: rgb(200, 194, 188);
+      clip-path: circle(50% at 50% 50%);
+    }
+  
+    60% {
+      background: rgb(200, 194, 188);
+      clip-path: circle(70% at 50% 50%);
+    }
+  
+    80% {
+      background: rgb(200, 194, 188);
+      clip-path: circle(80% at 50% 50%);
+    }
+  
+    100% {
+      background: rgb(200, 194, 188);
+      clip-path: circle(100% at 50% 50%);
+    }
+  }
+  

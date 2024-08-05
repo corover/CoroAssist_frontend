@@ -3,68 +3,42 @@ import { Button, IconButton } from "@mui/material";
 import moment from "moment";
 import "./Styles.css";
 import useSpeechRecognitionHook from "../../Hooks/useSpeechRecognitionHook";
-import {
-  setChatbot_view,
-  setLanguage_view,
-} from "../../store/Redux-Dispatcher/FlowDispatcher";
+
 import {
   reducer,
   apiSelector,
   flowReducer,
 } from "../../store/Redux-selector/Selector";
 import { useSelector } from "react-redux";
-import { fileUpload, registerFlow } from "../../Apis";
+import { registerFlow } from "../../Apis";
 import MicIcon from "@mui/icons-material/Mic";
 import SendIcon from "@mui/icons-material/Send";
 import { languageList } from "../../utils/data";
 import {
-  setCheckFileUpload,
   setCheckMic,
-  setLangFlag,
-  setLoading,
   setSelectedLanguage,
 } from "../../store/Redux-Dispatcher/Dispatcher";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Loading from "./Loading";
-import VoiceAnimation from "../../Loading/LoadingComponent";
-import { setApiData } from "../../store/Redux-Dispatcher/ApiDispatcher";
+import VoiceAnimation from "../../VoiceAnimation/VoiceAnimation";
 import Language from "../LanguageView/Index";
-import { ContainerVoice } from "../../UI/Style";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import { LogoImage, TopLogoHeader } from "../../ChatBot/Body/Style";
+import { LogoImage } from "../../ChatBot/Body/Style";
 import { setDefaultBtn } from "../../store/Redux-Dispatcher/Dispatcher";
-import {
-  startOver,
-  askAgain,
-  placeholder,
-  chatText,
-  audio,
-} from "../../translation";
-import Mic from "../../UI/Mic";
+import { placeholder, chatText, audio } from "../../translation";
+import UploadDrawer from "../../UI/UploadDrawer";
 function Messages() {
-  const { languageView, greetingView, chatbotView, uploadfileView } =
-    useSelector(flowReducer);
+
 
   const {
     selectedLanguage,
     loading,
     checkMic,
     langFlag,
-    checkFileUpload,
     defaultBtn,
   } = useSelector(reducer);
 
-  const options = [
-    {
-      val: (chatText as any)[selectedLanguage].button1,
-      id: 1,
-    },
-    {
-      val: (chatText as any)[selectedLanguage].button2,
-      id: 2,
-    },
-  ];
+ 
 
   const chatMessageRef = React.useRef<HTMLDivElement | null>(null);
   const [currentAudioUrl, setCurrentAudioUrl] = useState<string | null>(null);
@@ -75,7 +49,8 @@ function Messages() {
   const [micBtn, setMicBtn] = useState(true);
   const [sendBtn, setSendBtn] = useState(false);
   const { apiData, uploadData } = useSelector(apiSelector);
-  const [upload, setUpload] = useState(false);
+  const [upload, setUpload] = useState(true);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [translate, setTranslate] = useState(true);
 
   const {
@@ -140,14 +115,11 @@ function Messages() {
       },
     ]);
   };
-  const handleBack = () => {
-    setLangFlag(true);
-    setCheckFileUpload(true);
-  };
 
   const handleUpload = () => {
     setTranslate(false);
     setUpload(true);
+    setOpenDrawer(true);
     setDefaultBtn(false);
   };
   const handleSendMessage = async () => {
@@ -257,7 +229,11 @@ function Messages() {
   }, [selectedLanguage]);
 
   useEffect(() => {
+    let drawerTime: any;
     if (uploadData && uploadData.training) {
+      drawerTime = setTimeout(() => {
+        setOpenDrawer(false);
+      }, 3000);
       setUpload(false);
       setMessages((prevChats: any) => [
         ...prevChats,
@@ -276,15 +252,26 @@ function Messages() {
         },
       ]);
     }
+
+    return () => clearTimeout(drawerTime);
   }, [uploadData]);
+
   return (
     <>
       {!langFlag ? (
         <>
-          <div>
-            <IconButton size="medium" onClick={handleBack}>
-              <ArrowBackIcon style={{ color: "rgb(252, 103, 54)" }} />
-            </IconButton>
+          <div
+            style={{
+              display: "flex",
+
+              borderBottom: "1px solid #C8C2BC",
+              padding: "5px 5px",
+            }}
+          >
+            <LogoImage className={"LogoImage"} src="coro.png" alt="header" />
+            <span style={{ paddingTop: "10px", fontSize: "30px" }}>
+              CoroAssist
+            </span>
           </div>
 
           <div className="ContentChat" ref={chatMessageRef}>
@@ -309,9 +296,9 @@ function Messages() {
                         key={index}
                         style={{
                           display: "flex",
-                          flexDirection: "column",
+                          // flexDirection: "column",
                           // alignItems: "flex-end",
-                          padding: "10px 10px 0px 10px",
+                          padding: "10px 0px 0px 5px",
                           justifyContent: "flex-start",
                         }}
                       >
@@ -375,88 +362,106 @@ function Messages() {
                   )}
                 </React.Fragment>
               ))}
-          </div>
-          <>
-            {loading && <Loading />}
-            {/* <div className="BoxSentMSG" style={{ bottom: "80px " }}>
-                <Button variant="outlined">Delete</Button>
-                <Button variant="contained">Send</Button>
-              </div> */}
 
-            <div
-              className="BoxSentMSG"
-              style={{
-                bottom: "80px",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <Button
-                variant={!defaultBtn ? "outlined" : "contained"}
-                size="small"
-                style={{ width: "50%", margin: "7px" }}
-                onClick={handleTanslate}
+            <>
+              {loading && <Loading />}
+
+              <div
+                className="BoxSentMSG"
+                style={{
+                  bottom: "80px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
               >
-                {(chatText as any)[selectedLanguage].button1}
-              </Button>
-              <Button
-                variant={defaultBtn ? "outlined" : "contained"}
-                size="small"
-                style={{ width: "50%", margin: "7px" }}
-                onClick={handleUpload}
+                <Button
+                  variant={defaultBtn ? "outlined" : "contained"}
+                  size="small"
+                  style={{ width: "100%", margin: "7px" }}
+                  onClick={handleUpload}
+                >
+                  {(chatText as any)[selectedLanguage].button2}
+                </Button>
+              </div>
+              <div
+                className="BoxSentMSG"
+                style={{ border: "1px solid rgb(200, 194, 188)" }}
               >
-                {(chatText as any)[selectedLanguage].button2}
-              </Button>
-            </div>
-            <div className="BoxSentMSG" style={{  border: "1px solid #0C2D57",
-}}>
-              <input
+                <span
+                  style={{
+                    padding: "0px 10px",
+                    borderRight: "2px solid black",
+                  }}
+                >
+                  <span
+                    style={{ fontSize: "18px", fontWeight: 500 }}
+                    onClick={() =>
+                      setSelectedLanguage(
+                        selectedLanguage === "en" ? "hi" : "en"
+                      )
+                    }
+                  >
+                    {selectedLanguage.charAt(0).toUpperCase() +
+                      selectedLanguage.slice(1).toLowerCase()}
+                  </span>
+                </span>
+
+                <input
                   placeholder={(placeholder as any)[selectedLanguage]}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === "Enter" && input.length > 0) {
                       handleSendMessage();
                     }
                   }}
                   className="input"
                 />
 
-                {micBtn && (
-                  <>
-                    <IconButton
-                      style={{
-                        width: "40px",
-                        margin: "0px",
-                        color: "white",
-                      }}
-                      onClick={() => {
-                        isSpeechRecognitionSupported()
-                          ? startRecognition()
-                          : requestPermission();
-                        pauseAudio();
-                      }}
-                    >
-                      <MicIcon style={{ color: "#0C2D57", fontSize: "30px" }} />
-                    </IconButton>
-                  </>
-                )}
+                <span
+                  style={{
+                    borderLeft: "2px solid black",
+                    padding: "0px 5px",
+                  }}
+                >
+                  <span style={{ fontWeight: 500 }}>
+                    {micBtn && (
+                      <MicIcon
+                        style={{ color: "#0C2D57", fontSize: "25px" }}
+                        onClick={() => {
+                          isSpeechRecognitionSupported()
+                            ? startRecognition()
+                            : requestPermission();
+                          pauseAudio();
+                        }}
+                      />
+                    )}
 
-                {sendBtn && (
-                  <IconButton size="large" onClick={handleSendMessage}>
-                    <SendIcon style={{ color: "#0C2D57" }} />
-                  </IconButton>
-                )} 
-             
-            </div>
-          </>
+                    {sendBtn && (
+                      <SendIcon
+                        style={{ color: "#0C2D57" }}
+                        onClick={handleSendMessage}
+                      />
+                    )}
+                  </span>
+                </span>
+              </div>
+            </>
+          </div>
 
           {listening && <VoiceAnimation />}
         </>
       ) : (
         <Language />
       )}
-      {upload && <Mic close={setUpload} upload={upload} />}
+
+      {openDrawer && (
+        <UploadDrawer
+          close={setOpenDrawer}
+          upload={upload}
+          resetUpload={() => setUpload(true)}
+        />
+      )}
     </>
   );
 }

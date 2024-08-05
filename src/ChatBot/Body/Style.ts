@@ -31,8 +31,8 @@ export const TopLogoHeader = styled.div`
 
 export const LogoImage = styled.img`
 align-content: center;
-width: 70px;
-height: 60px;
+width: 60px;
+height: 50px;
 padding: 5px;
 `;
 
@@ -44,7 +44,7 @@ export const Footer = styled.span`
   font-size:10px;
   // padding-top: 5px;
   // padding-bottom: 5px;
-  border-top: 1px solid silver;
+  // border-top: 1px solid silver;
   
 `;
 

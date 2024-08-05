@@ -1,28 +1,29 @@
-import React from "react";
 import ChatContent from "../ChatContent/ChatContent";
-import {
-  Container,
-  TopLogoHeader,
-  LogoImage,
-  Footer,
-  FooterLink,
-} from "./Style";
+import { Container, Footer, FooterLink } from "./Style";
 
 const Chatbot = () => {
-  //  throw new Error('Oops, something went wrong!');
-
   return (
     <Container className={"Container"}>
       <ChatContent />
       <Footer className={"Footer"}>
         <span>
-          Powered by
           <FooterLink className={"FooterLink"} href="https://corover.ai/">
             <img
               src="CoRover.png"
               alt="corover"
-              width="50px"
-              style={{ marginBottom: "-2px" }}
+              width="60px"
+              style={{ marginBottom: "-2px", padding: "0px 7px 0px 0px", borderRight:"1px solid rgb(200, 194, 188)" }}
+            />
+          </FooterLink>
+          <FooterLink
+            className={"FooterLink"}
+            href="https://corover.ai/bharatgpt/"
+          >
+            <img
+              src="bharatGPT.png"
+              alt="corover"
+              width="80px"
+              style={{ position: "absolute", bottom: "-8px"}}
             />
           </FooterLink>
         </span>

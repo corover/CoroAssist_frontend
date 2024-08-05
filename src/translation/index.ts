@@ -27,8 +27,8 @@ export const chatText = {
   en: {
     greeting: "Hi! What can i do for you today",
     button1: "Translate",
-    button2: "Answer my queries",
-    translateTxt: "Please let me know what you want translate   ",
+    button2: "start with uploading document",
+    translateTxt: "Please let me know what you want translate",
     uploadMssg: " File uploaded successfully !",
     uploadMssg1: " Please ask your questions regarding the uploaded PDF",
     uploadLoading: "Please wait a moment...",
@@ -36,7 +36,7 @@ export const chatText = {
   hi: {
     greeting: "नमस्ते! मैं आज आपके लिये क्या कर सकता हूँ",
     button1: "अनुवाद",
-    button2: "मेरे सवाल का जवाब दो",
+    button2: "दस्तावेज़ अपलोड करने से प्रारंभ करें",
     translateTxt: "कृपया मुझे बताएं कि आप क्या अनुवाद करना चाहते हैं",
     uploadMssg: "फ़ाइल सफलतापूर्वक अपलोड की गई !",
     uploadMssg1: "कृपया अपलोड की गई पीडीएफ के संबंध में अपने प्रश्न पूछें",

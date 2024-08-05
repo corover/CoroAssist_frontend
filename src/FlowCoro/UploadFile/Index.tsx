@@ -51,6 +51,7 @@ const translation = {
     upload: "Upload PDF",
     uploadBtn: "Upload   ",
     uploadLoading: "Please wait a moment...",
+    success: "Document uploaded successfully !"
   },
   hi: {
     max: "अधिकतम फ़ाइल आकार 5 MB",
@@ -58,26 +59,20 @@ const translation = {
     upload: "PDF अपलोड करें",
     uploadBtn: "अपलोड",
     uploadLoading: " कृपया प्रतीक्षा करें...",
+    success: "दस्तावेज़ सफलतापूर्वक अपलोड हो गया |"
   },
 };
 
-function Upload() {
+function Upload(props: any) {
+  const { upload , resetUpload} = props;
+  console.log(upload);
   const { selectedLanguage } = useSelector(reducer);
   const [load, setLoad] = useState(false);
-  const [lang, setLang] = useState("en");
-  const nextContext = useSelector(apiSelector).nextContext;
   const [fileValid, setFileValid] = useState(false);
-
-  const { languageView, greetingView, chatbotView, uploadfileView } =
-    useSelector(flowReducer);
-
-  const handleSubmit = () => {
-    setLanguage_view(true);
-    setGreetings_view(false);
-  };
 
   const handleFileUpload = async (event: any) => {
     const file = event.target.files[0];
+    // resetUpload()
     if (file.size / 1048576 > 5) {
       setFileValid(true);
     } else {
@@ -86,7 +81,7 @@ function Upload() {
 
       if (uploadFile !== undefined && uploadFile.training === true) {
         setCheckFileUpload(true);
-        setLoad(false);
+   
         setUploadFile_view(false);
         setChatbot_view(true);
       }
@@ -116,98 +111,79 @@ function Upload() {
   }, []);
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          textAlign: "center",
-          // paddingTop: "10vh",
-        }}
-      >
-        {!load ? (
-          <>
-            <span
-              style={{
-                fontSize: "22px",
-                color: "black",
-                margin: "-12px 0px 20px 0px",
-              }}
-            >
-              {(translation as any)[selectedLanguage].upload}
-            </span>
+    <React.Fragment>
+      {!load ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            // justifyContent: "center",
+            textAlign: "center",
+            height: "25vh",
+          }}
+        >
+          <span
+            style={{
+              fontSize: "22px",
+              color: "black",
+              padding: "50px 0px 20px 0px ",
+            }}
+          >
+            {(translation as any)[selectedLanguage].upload}
+          </span>
+          <Button
+            size="small"
+            component="label"
+            variant="text"
+            onChange={handleFileUpload}
+            startIcon={<CloudUploadIcon style={{ fontSize: "25px" }} />}
+          >
+            {(translation as any)[selectedLanguage].uploadBtn}
+            <VisuallyHiddenInput type="file" />
+          </Button>
 
-            <img
-              src="upload-icon-3.png"
-              alt=""
-              height="40px"
-              width="70px"
-              style={{ margin: "auto", paddingBottom: "20px" }}
-            />
-
-            <Button
-              size="small"
-              component="label"
-              variant="contained"
-              onChange={handleFileUpload}
-              style={{
-                margin: "auto",
-                backgroundColor: "rgb(252, 103, 54)",
-                color: "white",
-                marginBottom: "20px",
-              }}
-            >
-              {(translation as any)[selectedLanguage].uploadBtn}
-              <VisuallyHiddenInput type="file" />
-            </Button>
-
-            <div style={{ marginBottom: "20px" }}>
-              {fileValid ? (
-                <>
-                  <span
-                    style={{
-                      padding: "10px",
-                      fontStyle: "italic",
-                      color: "#D83F31",
-                    }}
-                  >
-                    {(translation as any)[selectedLanguage].maxErr}
-                  </span>
-                  {/* <br />
-                  <span
-                    style={{
-                      padding: "10px",
-                      fontStyle: "italic",
-                      color: "#D83F31",
-                    }}
-                  >
-                    Please upload less than 5 MB
-                  </span> */}
-                </>
-              ) : (
+          <div style={{ marginBottom: "20px" }}>
+            {fileValid ? (
+              <>
                 <span
                   style={{
                     padding: "10px",
                     fontStyle: "italic",
-                    color: "#436850",
+                    color: "#D83F31",
                   }}
                 >
-                  {(translation as any)[selectedLanguage].max}
+                  {(translation as any)[selectedLanguage].maxErr}
                 </span>
-              )}
-            </div>
-          </>
-        ) : (
-          <>
-            <p> {(translation as any)[selectedLanguage].uploadLoading}</p>
-            <div className="loadingArea">
-              <div className="loader"></div>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
+              </>
+            ) : (
+              <span
+                style={{
+                  padding: "10px",
+                  fontStyle: "italic",
+                  color: "#436850",
+                }}
+              >
+                {(translation as any)[selectedLanguage].max}
+              </span>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div>
+          {upload ? (
+            <span style={{ display: "flex", justifyContent: "center", flexDirection:"column"}}>
+              <p>{(translation as any)[selectedLanguage].uploadLoading}</p>
+              <img src="uploading.gif" alt="" width={200} />
+            </span>
+          ) : (
+            <span style={{ display: "flex", justifyContent: "center" ,  flexDirection:"column"}}>
+              <p>{(translation as any)[selectedLanguage].success}</p>
+              <img src="succes.gif" alt="" width={200} />
+            </span>
+          )}
+        </div>
+      )}
+    </React.Fragment>
   );
 }
 
