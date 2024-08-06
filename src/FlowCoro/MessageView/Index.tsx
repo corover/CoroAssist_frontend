@@ -28,17 +28,8 @@ import { setDefaultBtn } from "../../store/Redux-Dispatcher/Dispatcher";
 import { placeholder, chatText, audio } from "../../translation";
 import UploadDrawer from "../../UI/UploadDrawer";
 function Messages() {
-
-
-  const {
-    selectedLanguage,
-    loading,
-    checkMic,
-    langFlag,
-    defaultBtn,
-  } = useSelector(reducer);
-
- 
+  const { selectedLanguage, loading, checkMic, langFlag, defaultBtn } =
+    useSelector(reducer);
 
   const chatMessageRef = React.useRef<HTMLDivElement | null>(null);
   const [currentAudioUrl, setCurrentAudioUrl] = useState<string | null>(null);
@@ -263,15 +254,20 @@ function Messages() {
           <div
             style={{
               display: "flex",
-
+              backgroundColor: "#272727",
               borderBottom: "1px solid #C8C2BC",
               padding: "5px 5px",
+              justifyContent: "center",
             }}
           >
-            <LogoImage className={"LogoImage"} src="coro.png" alt="header" />
-            <span style={{ paddingTop: "10px", fontSize: "30px" }}>
+            <LogoImage
+              className={"LogoImage"}
+              src="logocoro1.png"
+              alt="header"
+            />
+            {/* <span style={{ paddingTop: "10px", fontSize: "30px" }}>
               CoroAssist
-            </span>
+            </span> */}
           </div>
 
           <div className="ContentChat" ref={chatMessageRef}>
@@ -287,6 +283,7 @@ function Messages() {
                       <div className={"user"} key={index}>
                         {message.text}
                       </div>
+
                       <p className="timeuser">{message.time}</p>
                     </>
                   )}
@@ -303,7 +300,7 @@ function Messages() {
                         }}
                       >
                         <img
-                          src="coro.png"
+                          src="bot.png"
                           alt="icon"
                           width="30px"
                           height="30px"
@@ -329,7 +326,7 @@ function Messages() {
                                       >
                                         <VolumeOffIcon
                                           style={{
-                                            color: "#ED2B2A",
+                                            color: "#303841",
                                             marginTop: "-5px",
                                             fontSize: "22px ",
                                           }}
@@ -344,7 +341,7 @@ function Messages() {
                                       >
                                         <VolumeUpIcon
                                           style={{
-                                            color: "#4E9F3D",
+                                            color: "#303841",
                                             marginTop: "-5px",
                                             fontSize: "22px ",
                                           }}
@@ -375,12 +372,21 @@ function Messages() {
                 }}
               >
                 <Button
-                  variant={defaultBtn ? "outlined" : "contained"}
+                  // variant={defaultBtn ? "outlined" : "contained"}
                   size="small"
-                  style={{ width: "100%", margin: "7px" }}
+                  style={{
+                    width: "100%",
+                    // margin: "7px",
+                    border: "1px solid #303841",
+                    color: " #303841",
+                  }}
                   onClick={handleUpload}
                 >
-                  {(chatText as any)[selectedLanguage].button2}
+                  <b>
+                    {defaultBtn
+                      ? (chatText as any)[selectedLanguage].button2
+                      : (chatText as any)[selectedLanguage].reupload}
+                  </b>
                 </Button>
               </div>
               <div
@@ -390,11 +396,15 @@ function Messages() {
                 <span
                   style={{
                     padding: "0px 10px",
-                    borderRight: "2px solid black",
+                    borderRight: "2px solid #303841",
                   }}
                 >
                   <span
-                    style={{ fontSize: "18px", fontWeight: 500 }}
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: 500,
+                      color: "#303841",
+                    }}
                     onClick={() =>
                       setSelectedLanguage(
                         selectedLanguage === "en" ? "hi" : "en"
@@ -420,14 +430,14 @@ function Messages() {
 
                 <span
                   style={{
-                    borderLeft: "2px solid black",
+                    borderLeft: "2px solid #303841",
                     padding: "0px 5px",
                   }}
                 >
                   <span style={{ fontWeight: 500 }}>
                     {micBtn && (
                       <MicIcon
-                        style={{ color: "#0C2D57", fontSize: "25px" }}
+                        style={{ color: "#303841", fontSize: "25px" }}
                         onClick={() => {
                           isSpeechRecognitionSupported()
                             ? startRecognition()
@@ -439,7 +449,7 @@ function Messages() {
 
                     {sendBtn && (
                       <SendIcon
-                        style={{ color: "#0C2D57" }}
+                        style={{ color: "#303841" }}
                         onClick={handleSendMessage}
                       />
                     )}

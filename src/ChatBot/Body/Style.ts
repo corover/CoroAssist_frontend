@@ -31,7 +31,7 @@ export const TopLogoHeader = styled.div`
 
 export const LogoImage = styled.img`
 align-content: center;
-width: 60px;
+width: 200px;
 height: 50px;
 padding: 5px;
 `;

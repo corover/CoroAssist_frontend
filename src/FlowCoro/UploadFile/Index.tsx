@@ -31,6 +31,7 @@ import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import { setDefaultBtn } from "../../store/Redux-Dispatcher/Dispatcher";
+import { Checkmark, SuccessAnimation, Circle, Check } from "../../UI/Style";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -51,7 +52,7 @@ const translation = {
     upload: "Upload PDF",
     uploadBtn: "Upload   ",
     uploadLoading: "Please wait a moment...",
-    success: "Document uploaded successfully !"
+    success: "Document uploaded successfully !",
   },
   hi: {
     max: "अधिकतम फ़ाइल आकार 5 MB",
@@ -59,12 +60,12 @@ const translation = {
     upload: "PDF अपलोड करें",
     uploadBtn: "अपलोड",
     uploadLoading: " कृपया प्रतीक्षा करें...",
-    success: "दस्तावेज़ सफलतापूर्वक अपलोड हो गया |"
+    success: "दस्तावेज़ सफलतापूर्वक अपलोड हो गया |",
   },
 };
 
 function Upload(props: any) {
-  const { upload , resetUpload} = props;
+  const { upload, resetUpload } = props;
   console.log(upload);
   const { selectedLanguage } = useSelector(reducer);
   const [load, setLoad] = useState(false);
@@ -81,7 +82,7 @@ function Upload(props: any) {
 
       if (uploadFile !== undefined && uploadFile.training === true) {
         setCheckFileUpload(true);
-   
+
         setUploadFile_view(false);
         setChatbot_view(true);
       }
@@ -122,66 +123,91 @@ function Upload(props: any) {
             height: "25vh",
           }}
         >
-          <span
+          <div
             style={{
               fontSize: "22px",
               color: "black",
-              padding: "50px 0px 20px 0px ",
+              // padding: "50px 0px 20px 0px ",
             }}
           >
             {(translation as any)[selectedLanguage].upload}
-          </span>
-          <Button
-            size="small"
-            component="label"
-            variant="text"
-            onChange={handleFileUpload}
-            startIcon={<CloudUploadIcon style={{ fontSize: "25px" }} />}
+          </div>
+          <div
+            style={{ display: "flex", flexDirection: "column", margin: "auto" }}
           >
-            {(translation as any)[selectedLanguage].uploadBtn}
-            <VisuallyHiddenInput type="file" />
-          </Button>
+            <div>
+              <Button
+                size="small"
+                component="label"
+                variant="text"
+                onChange={handleFileUpload}
+                startIcon={<CloudUploadIcon style={{ fontSize: "25px" }} />}
+              >
+                {(translation as any)[selectedLanguage].uploadBtn}
+                <VisuallyHiddenInput type="file" />
+              </Button>
+            </div>
 
-          <div style={{ marginBottom: "20px" }}>
-            {fileValid ? (
-              <>
+            <div style={{ marginBottom: "20px" }}>
+              {fileValid ? (
+                <>
+                  <span
+                    style={{
+                      padding: "10px",
+                      fontStyle: "italic",
+                      color: "#D83F31",
+                    }}
+                  >
+                    {(translation as any)[selectedLanguage].maxErr}
+                  </span>
+                </>
+              ) : (
                 <span
                   style={{
                     padding: "10px",
                     fontStyle: "italic",
-                    color: "#D83F31",
+                    color: "#303841",
                   }}
                 >
-                  {(translation as any)[selectedLanguage].maxErr}
+                  {(translation as any)[selectedLanguage].max}
                 </span>
-              </>
-            ) : (
-              <span
-                style={{
-                  padding: "10px",
-                  fontStyle: "italic",
-                  color: "#436850",
-                }}
-              >
-                {(translation as any)[selectedLanguage].max}
-              </span>
-            )}
+              )}
+            </div>
           </div>
         </div>
       ) : (
-        <div>
+        <>
           {upload ? (
-            <span style={{ display: "flex", justifyContent: "center", flexDirection:"column"}}>
-              <p>{(translation as any)[selectedLanguage].uploadLoading}</p>
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                margin: "auto",
+              }}
+            >
+              <span style={{ textAlign: "center", display: "block" }}>
+                {(translation as any)[selectedLanguage].uploadLoading}
+              </span>
               <img src="uploading.gif" alt="" width={200} />
             </span>
           ) : (
-            <span style={{ display: "flex", justifyContent: "center" ,  flexDirection:"column"}}>
-              <p>{(translation as any)[selectedLanguage].success}</p>
-              <img src="succes.gif" alt="" width={200} />
+            <span>
+              <span style={{ textAlign: "center", display: "block" }}>
+                {(translation as any)[selectedLanguage].success}
+              </span>
+
+              <SuccessAnimation>
+                <Checkmark
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 52 52"
+                >
+                  <Circle cx="26" cy="26" r="25" fill="none" />
+                  <Check fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </Checkmark>
+              </SuccessAnimation>
             </span>
           )}
-        </div>
+        </>
       )}
     </React.Fragment>
   );

@@ -11,19 +11,8 @@ const Chatbot = () => {
             <img
               src="CoRover.png"
               alt="corover"
-              width="60px"
-              style={{ marginBottom: "-2px", padding: "0px 7px 0px 0px", borderRight:"1px solid rgb(200, 194, 188)" }}
-            />
-          </FooterLink>
-          <FooterLink
-            className={"FooterLink"}
-            href="https://corover.ai/bharatgpt/"
-          >
-            <img
-              src="bharatGPT.png"
-              alt="corover"
-              width="80px"
-              style={{ position: "absolute", bottom: "-8px"}}
+              width="170px"
+              style={{ padding: "0px 0px 6px 0px" }}
             />
           </FooterLink>
         </span>

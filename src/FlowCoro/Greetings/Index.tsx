@@ -66,7 +66,7 @@ function Greetings() {
         <img
           src="logocoro.png"
           alt="coroAssist"
-          width="180px"
+          width="300px"
           style={{ margin: "auto" }}
         />
       </div>
@@ -82,10 +82,10 @@ function Greetings() {
         }}
       >
         <IconButton
-          style={{ backgroundColor: "rgb(252, 103, 54)" }}
+          style={{ border:"1px solid black"}}
           onClick={handleSubmit}
         >
-          <EastIcon style={{ color: "white" }} />
+          <EastIcon style={{ color: "black" }} />
         </IconButton>
       </div>
     </div>

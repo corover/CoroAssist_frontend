@@ -30,9 +30,6 @@ function ChatContent() {
   return (
     <div
       className="ContentChat"
-      style={{
-        background: `white`,
-      }}
     >
    
 

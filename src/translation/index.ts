@@ -32,6 +32,7 @@ export const chatText = {
     uploadMssg: " File uploaded successfully !",
     uploadMssg1: " Please ask your questions regarding the uploaded PDF",
     uploadLoading: "Please wait a moment...",
+    reupload:"upload other document"
   },
   hi: {
     greeting: "नमस्ते! मैं आज आपके लिये क्या कर सकता हूँ",
@@ -41,6 +42,7 @@ export const chatText = {
     uploadMssg: "फ़ाइल सफलतापूर्वक अपलोड की गई !",
     uploadMssg1: "कृपया अपलोड की गई पीडीएफ के संबंध में अपने प्रश्न पूछें",
     uploadLoading: " कृपया प्रतीक्षा करें...",
+    reupload:"अन्य दस्तावेज़ अपलोड करें"
   },
 };
 

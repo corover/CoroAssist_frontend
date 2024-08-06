@@ -1,49 +1,36 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 
-const animation = keyframes`
-  20% {
-    background-position: 0% 0%, 50% 50%, 100% 50%;
-  }
-  40% {
-    background-position: 0% 100%, 50% 0%, 100% 50%;
-  }
-  60% {
-    background-position: 0% 50%, 50% 100%, 100% 0%;
-  }
-  80% {
-    background-position: 0% 50%, 50% 50%, 100% 100%;
-  }
-`;
 
-const LoadingAnimation = styled.span`
-  margin-left: 13px;
-  width: 35px;
-  aspect-ratio: 2;
-  --_g: no-repeat radial-gradient(circle closest-side, #fc6736 90%, #0000);
-  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
-  background-size: calc(100% / 3) 50%;
-  animation: ${animation} 1s infinite linear;
-`;
 
 const LoadingContainer = styled.div`
   display: flex;
   flex-direction: row;
   min-width: 10%;
   align-items: flex-end;
-  padding: 10px;
+  padding: 5px 0px 0px 5px;
   justify-content: flex-start;
-`;
-
-const Logo = styled.img`
-  width: 25px;
-  height: 25px;
+  max-width: 50%;
 `;
 
 export default function Loading() {
   return (
-    <LoadingContainer className={"LoadingContainer"}>
-      {/* <Logo className="Logo " src="a_logo.png" alt="icon" /> */}
-      <LoadingAnimation className={"LoadingAnimation"}> </LoadingAnimation>
-    </LoadingContainer>
+    <div style={{display:"flex"}}>
+      <img
+        src="bot.png"
+        alt="icon"
+        width="30px"
+        height="30px"
+        style={{ marginRight: "5px" }}
+      />
+      <LoadingContainer className={"LoadingContainer"}>
+        <Box sx={{ width: 300 }}>
+          <Skeleton animation="wave" />
+          <Skeleton animation="wave" />
+          <Skeleton animation="wave" />
+        </Box>
+      </LoadingContainer>
+    </div>
   );
 }
