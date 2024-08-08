@@ -30,7 +30,7 @@ export const chatText = {
     button2: "start with uploading document",
     translateTxt: "Please let me know what you want translate",
     uploadMssg: " File uploaded successfully !",
-    uploadMssg1: " Please ask your questions regarding the uploaded PDF",
+    uploadMssg1: " Please ask your questions regarding the uploaded document",
     uploadLoading: "Please wait a moment...",
     reupload:"upload other document"
   },
@@ -40,7 +40,7 @@ export const chatText = {
     button2: "दस्तावेज़ अपलोड करने से प्रारंभ करें",
     translateTxt: "कृपया मुझे बताएं कि आप क्या अनुवाद करना चाहते हैं",
     uploadMssg: "फ़ाइल सफलतापूर्वक अपलोड की गई !",
-    uploadMssg1: "कृपया अपलोड की गई पीडीएफ के संबंध में अपने प्रश्न पूछें",
+    uploadMssg1: "कृपया अपलोड किए गए दस्तावेज़ के संबंध में अपने प्रश्न पूछें",
     uploadLoading: " कृपया प्रतीक्षा करें...",
     reupload:"अन्य दस्तावेज़ अपलोड करें"
   },

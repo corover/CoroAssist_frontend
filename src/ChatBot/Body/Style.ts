@@ -37,14 +37,12 @@ padding: 5px;
 `;
 
 export const Footer = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  font-size:10px;
-  // padding-top: 5px;
-  // padding-bottom: 5px;
-  // border-top: 1px solid silver;
+ padding: 0px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    font-size: 10px;
   
 `;
 

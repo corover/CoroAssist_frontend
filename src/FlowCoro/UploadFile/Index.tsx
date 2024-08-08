@@ -73,20 +73,19 @@ function Upload(props: any) {
 
   const handleFileUpload = async (event: any) => {
     const file = event.target.files[0];
-    // resetUpload()
-    if (file.size / 1048576 > 5) {
-      setFileValid(true);
-    } else {
-      setLoad(true);
-      const uploadFile = await fileUpload(file);
+    // if (file.size / 1048576 > 5) {
+    //   setFileValid(true);
+    // } else {
+    setLoad(true);
+    const uploadFile = await fileUpload(file);
 
-      if (uploadFile !== undefined && uploadFile.training === true) {
-        setCheckFileUpload(true);
+    if (uploadFile !== undefined && uploadFile.training === true) {
+      setCheckFileUpload(true);
 
-        setUploadFile_view(false);
-        setChatbot_view(true);
-      }
+      setUploadFile_view(false);
+      setChatbot_view(true);
     }
+    // }
   };
 
   useEffect(() => {
@@ -120,7 +119,7 @@ function Upload(props: any) {
             flexDirection: "column",
             // justifyContent: "center",
             textAlign: "center",
-            height: "25vh",
+            height: "35vh",
           }}
         >
           <div
@@ -144,11 +143,14 @@ function Upload(props: any) {
                 startIcon={<CloudUploadIcon style={{ fontSize: "25px" }} />}
               >
                 {(translation as any)[selectedLanguage].uploadBtn}
-                <VisuallyHiddenInput type="file" />
+                <VisuallyHiddenInput
+                  type="file"
+                  accept=".pdf, .xls, .xlsx, .csv, .txt, .doc, .docx"
+                />
               </Button>
             </div>
 
-            <div style={{ marginBottom: "20px" }}>
+            {/* <div style={{ marginBottom: "20px" }}>
               {fileValid ? (
                 <>
                   <span
@@ -172,11 +174,11 @@ function Upload(props: any) {
                   {(translation as any)[selectedLanguage].max}
                 </span>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       ) : (
-        <>
+        <span style={{     height: "35vh",}}>
           {upload ? (
             <span
               style={{
@@ -207,7 +209,7 @@ function Upload(props: any) {
               </SuccessAnimation>
             </span>
           )}
-        </>
+        </span>
       )}
     </React.Fragment>
   );
